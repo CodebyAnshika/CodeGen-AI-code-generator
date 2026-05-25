@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Code Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">⚡ Loading...</div>
+
+<!-- MAIN APP -->
+<div class="app">
+
+  <!-- LEFT: CHAT -->
+  <div class="chat-section">
+    <div class="chat-header">
+      <h2>⚡ AI CodeGen</h2>
+      <button id="clearChat">Clear</button>
+    </div>
+
+    <div id="chatContainer" class="chat-container"></div>
+    <div class="suggestions">
+  <p>Try something:</p>
+  <div class="suggestion-list">
+    <button class="suggestion">Create a login form UI</button>
+    <button class="suggestion">Build a responsive navbar</button>
+    <button class="suggestion">Fix my broken CSS layout</button>
+    <button class="suggestion">Explain this JavaScript code</button>
+  </div>
+</div>
+
+    <div class="chat-input">
+      <textarea id="userInput" placeholder="Describe UI or paste code..."></textarea>
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <!-- RESIZER -->
+  <div id="resizer"></div>
+
+  <!-- RIGHT: CODE + PREVIEW -->
+  <div class="code-section">
+
+    <div class="tabs">
+      <button data-tab="html" class="active">HTML</button>
+      <button data-tab="css">CSS</button>
+      <button data-tab="js">JS</button>
+      <button id="previewToggle">Preview</button>
+    </div>
+
+    <div class="code-area">
+      <textarea id="htmlCode"></textarea>
+      <textarea id="cssCode" class="hidden"></textarea>
+      <textarea id="jsCode" class="hidden"></textarea>
+    </div>
+
+    <div class="code-actions">
+      <button id="runCode">Run</button>
+      <button id="copyCode">Copy</button>
+      <button id="downloadCode">Download</button>
+      <button id="saveProject">Save</button>
+      <button id="loadProject">Load</button>
+      <button id="deployNetlify">Deploy</button>
+    </div>
+       </div>
+   
+    <div id="fullscreenPreview" class="fullscreen-preview hidden">
+  <button id="exitPreview">✖ Exit</button>
+  <iframe id="fullPreviewFrame"></iframe>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="script.js" defer></script>
+</body>
+</html>
