@@ -52,11 +52,10 @@ app.post("/api/generate", async (req, res) => {
 });
 
 // Serve static files from current folder
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname)));
 
-// Homepage
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+app.get("/", (req,res)=>{
+    res.sendFile(path.join(__dirname,"index.html"));
 });
 
 const PORT = process.env.PORT || 3000;
