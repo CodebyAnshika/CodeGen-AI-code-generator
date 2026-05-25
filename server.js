@@ -1,5 +1,4 @@
 require("dotenv").config();
-
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -19,8 +18,8 @@ app.post("/api/generate", async (req, res) => {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           model: "openai/gpt-4o-mini",
@@ -44,22 +43,24 @@ app.post("/api/generate", async (req, res) => {
       reply: data.choices?.[0]?.message?.content || "No response"
     });
 
-  } catch (err) {
-    console.log(err);
-
+  } catch (error) {
+    console.log(error);
     res.status(500).json({
-      error: "Server Error"
+      error: "Server error"
     });
   }
 });
 
-// Serve frontend files
+// Serve static files from current folder
 app.use(express.static(__dirname));
 
-// Homepage route
+// Homepage
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// IMPORTANT for Vercel
-module.exports = app;
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
+});
