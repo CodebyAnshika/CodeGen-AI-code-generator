@@ -8,7 +8,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// API route
+// Serve ALL static files
+app.use(express.static(__dirname));
+
+// API
 app.post("/api/generate", async (req, res) => {
   try {
     const { prompt } = req.body;
@@ -18,7 +21,7 @@ app.post("/api/generate", async (req, res) => {
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -43,23 +46,17 @@ app.post("/api/generate", async (req, res) => {
       reply: data.choices?.[0]?.message?.content || "No response"
     });
 
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
     res.status(500).json({
       error: "Server error"
     });
   }
 });
 
-// Serve static files from current folder
-app.use(express.static(path.join(__dirname)));
-
-app.get("/", (req,res)=>{
-    res.sendFile(path.join(__dirname,"index.html"));
+// Homepage route LAST
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
-});
+module.exports = app;
